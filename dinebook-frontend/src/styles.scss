@@ -1,0 +1,534 @@
+@use '@angular/material' as mat;
+
+
+// Enhanced color palette with semantic naming
+:root {
+  --primary-50: #eef2ff;
+  --primary-100: #e0e7ff;
+  --primary-500: #6366f1;
+  --primary-600: #4f46e5;
+  --primary-700: #4338ca;
+  
+  --secondary-500: #8b5cf6;
+  --secondary-600: #7c3aed;
+  
+  --success-50: #f0fdf4;
+  --success-500: #10b981;
+  --success-600: #059669;
+  
+  --error-50: #fef2f2;
+  --error-500: #ef4444;
+  --error-600: #dc2626;
+  
+  --warning-50: #fffbeb;
+  --warning-500: #f59e0b;
+  
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  
+  --surface: #ffffff;
+  --surface-hover: #f8fafc;
+  --background: #fafafa;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  --border-radius-sm: 6px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow: 300ms ease;
+}
+
+// Typography system
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  font-family: $font-family;
+  background-color: var(--background);
+  color: var(--gray-800);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// Enhanced Material Design overrides
+.mat-mdc-form-field {
+  width: 100%;
+  
+  .mat-mdc-text-field-wrapper {
+    transition: var(--transition-fast);
+  }
+  
+  .mdc-text-field--filled {
+    background-color: var(--gray-50);
+  }
+  
+  .mdc-text-field--outlined {
+    .mdc-notched-outline {
+      border-color: var(--gray-400);
+      border-radius: 0;
+
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-radius: 0;
+      }
+    }
+    
+    &:hover .mdc-notched-outline {
+      border-color: var(--gray-500);
+    }
+    
+    &.mdc-text-field--focused .mdc-notched-outline {
+      border-color: var(--primary-500);
+      border-width: 2px;
+    }
+  }
+}
+
+// Rectangular fields for auth pages
+.auth-page {
+  .mat-mdc-form-field {
+    .mdc-text-field--outlined {
+      .mdc-notched-outline {
+        border-radius: 0;
+        border-color: var(--gray-400);
+        
+        .mdc-notched-outline__leading,
+        .mdc-notched-outline__notch,
+        .mdc-notched-outline__trailing {
+          border-radius: 0;
+        }
+      }
+    }
+  }
+}
+
+.mat-mdc-card {
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--gray-200);
+  background-color: var(--surface);
+  transition: var(--transition-normal);
+  
+  &:hover {
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+// Modern Button Design System - Consistent & Clean
+.mat-mdc-button, .mat-mdc-raised-button, .mat-mdc-outlined-button, .mat-mdc-fab, .mat-mdc-stroked-button {
+  border-radius: var(--border-radius-md) !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  padding: 0 20px !important;
+  height: 44px !important;
+  font-size: 0.95rem !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+  
+  // Completely neutralize ALL Material Design colors
+  &.mat-primary, &.mat-accent, &.mat-warn {
+    --mdc-filled-button-container-color: transparent !important;
+    --mdc-outlined-button-outline-color: transparent !important;
+    --mdc-text-button-label-text-color: inherit !important;
+    --mdc-filled-button-label-text-color: inherit !important;
+    background-color: transparent !important;
+    color: inherit !important;
+  }
+  
+  // Override any Material Design state colors
+  &:hover.mat-primary, &:hover.mat-accent, &:hover.mat-warn,
+  &:focus.mat-primary, &:focus.mat-accent, &:focus.mat-warn,
+  &:active.mat-primary, &:active.mat-accent, &:active.mat-warn {
+    background-color: transparent !important;
+    color: inherit !important;
+  }
+  
+  &:focus {
+    outline: 2px solid var(--primary-500) !important;
+    outline-offset: 2px !important;
+  }
+  
+  &:disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  // Size variants
+  &.btn-sm {
+    height: 36px !important;
+    padding: 0 16px !important;
+    font-size: 0.875rem !important;
+  }
+  
+  &.btn-lg {
+    height: 48px !important;
+    padding: 0 24px !important;
+    font-size: 1rem !important;
+  }
+  
+  &.btn-xl {
+    height: 52px !important;
+    padding: 0 32px !important;
+    font-size: 1.1rem !important;
+  }
+}
+
+// Primary Button - Main actions (Blue theme)
+.btn-primary, .mat-mdc-raised-button.btn-primary {
+  background-color: var(--primary-500) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: var(--shadow-sm) !important;
+  
+  &:hover:not(:disabled) {
+    background-color: var(--primary-600) !important;
+    box-shadow: var(--shadow-md) !important;
+    transform: translateY(-1px) !important;
+  }
+  
+  &:active {
+    transform: translateY(0) !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+}
+
+// Secondary Button - Secondary actions (Outlined blue)
+.btn-secondary, .mat-mdc-outlined-button.btn-secondary, .mat-mdc-stroked-button.btn-secondary {
+  background-color: transparent !important;
+  color: var(--primary-600) !important;
+  border: 1px solid var(--primary-300) !important;
+  box-shadow: none !important;
+  
+  &:hover:not(:disabled) {
+    background-color: var(--primary-50) !important;
+    border-color: var(--primary-400) !important;
+    color: var(--primary-700) !important;
+    transform: none !important;
+  }
+  
+  &:active {
+    background-color: var(--primary-100) !important;
+  }
+}
+
+// White Button - For colored backgrounds like hero sections
+.btn-white, .mat-mdc-button.btn-white, .mat-mdc-outlined-button.btn-white {
+  background-color: white !important;
+  color: var(--gray-700) !important;
+  border: 1px solid white !important;
+  box-shadow: var(--shadow-sm) !important;
+  font-weight: 500 !important;
+  
+  &:hover:not(:disabled) {
+    background-color: var(--gray-50) !important;
+    color: var(--gray-900) !important;
+    border-color: var(--gray-200) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+  
+  &:active {
+    transform: translateY(0) !important;
+    background-color: var(--gray-100) !important;
+  }
+  
+  // Icon styling for Learn More buttons
+  mat-icon {
+    font-size: 1.125rem !important;
+    width: 1.125rem !important;
+    height: 1.125rem !important;
+  }
+}
+
+// Ghost Button - Minimal actions
+.btn-ghost, .mat-mdc-button.btn-ghost {
+  background-color: transparent !important;
+  color: var(--gray-700) !important;
+  border: none !important;
+  box-shadow: none !important;
+  
+  &:hover:not(:disabled) {
+    background-color: var(--gray-100) !important;
+    color: var(--gray-900) !important;
+    transform: none !important;
+  }
+  
+  &:active {
+    background-color: var(--gray-200) !important;
+  }
+}
+
+// Danger Button - Destructive actions
+.btn-danger {
+  background-color: var(--error-500) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: var(--shadow-sm) !important;
+  
+  &:hover:not(:disabled) {
+    background-color: var(--error-600) !important;
+    box-shadow: var(--shadow-md) !important;
+    transform: translateY(-1px) !important;
+  }
+  
+  &:active {
+    transform: translateY(0) !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+}
+
+// Success Button - Positive actions
+.btn-success {
+  background-color: var(--success-500) !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: var(--shadow-sm) !important;
+  
+  &:hover:not(:disabled) {
+    background-color: var(--success-600) !important;
+    box-shadow: var(--shadow-md) !important;
+    transform: translateY(-1px) !important;
+  }
+  
+  &:active {
+    transform: translateY(0) !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+}
+
+// Override Material Design defaults that cause unwanted colors
+.mat-mdc-button:not(.btn-primary):not(.btn-secondary):not(.btn-ghost):not(.btn-danger):not(.btn-success):not(.btn-white) {
+  color: var(--gray-700) !important;
+  background-color: transparent !important;
+  
+  &:hover {
+    background-color: var(--gray-100) !important;
+    color: var(--gray-900) !important;
+  }
+}
+
+.mat-mdc-raised-button:not(.btn-primary):not(.btn-secondary):not(.btn-ghost):not(.btn-danger):not(.btn-success):not(.btn-white) {
+  background-color: var(--gray-100) !important;
+  color: var(--gray-700) !important;
+  box-shadow: var(--shadow-sm) !important;
+  
+  &:hover {
+    background-color: var(--gray-200) !important;
+    color: var(--gray-900) !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+}
+
+.mat-mdc-outlined-button:not(.btn-primary):not(.btn-secondary):not(.btn-ghost):not(.btn-danger):not(.btn-success):not(.btn-white),
+.mat-mdc-stroked-button:not(.btn-primary):not(.btn-secondary):not(.btn-ghost):not(.btn-danger):not(.btn-success):not(.btn-white) {
+  color: var(--gray-700) !important;
+  border-color: var(--gray-300) !important;
+  background-color: transparent !important;
+  
+  &:hover {
+    background-color: var(--gray-50) !important;
+    border-color: var(--gray-400) !important;
+    color: var(--gray-900) !important;
+  }
+}
+
+// Completely neutralize ALL Material Design theme variables
+:root {
+  --mdc-theme-primary: var(--primary-500) !important;
+  --mdc-theme-secondary: var(--secondary-500) !important;
+  --mdc-theme-surface: var(--surface) !important;
+  --mdc-theme-background: var(--background) !important;
+  --mdc-theme-error: var(--error-500) !important;
+  
+  // Button specific overrides
+  --mdc-filled-button-container-color: transparent !important;
+  --mdc-filled-button-label-text-color: inherit !important;
+  --mdc-outlined-button-outline-color: var(--gray-300) !important;
+  --mdc-text-button-label-text-color: inherit !important;
+}
+
+// Icon Button styling
+.mat-mdc-icon-button {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: var(--border-radius-md) !important;
+  transition: all 0.2s ease !important;
+  
+  &:hover {
+    background-color: var(--gray-100) !important;
+    transform: scale(1.05) !important;
+  }
+  
+  &.btn-sm {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  
+  &.btn-lg {
+    width: 48px !important;
+    height: 48px !important;
+  }
+}
+
+// Button with icons
+.btn-with-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  
+  mat-icon {
+    font-size: 1.25rem !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+  }
+  
+  &.icon-right {
+    flex-direction: row-reverse !important;
+  }
+}
+
+// Remove Material Design ripple effects that cause color issues
+.mat-mdc-button .mat-mdc-button-ripple,
+.mat-mdc-raised-button .mat-mdc-button-ripple,
+.mat-mdc-outlined-button .mat-mdc-button-ripple {
+  display: none !important;
+}
+
+// Force consistent focus styles
+.mat-mdc-button:focus,
+.mat-mdc-raised-button:focus,
+.mat-mdc-outlined-button:focus,
+.mat-mdc-stroked-button:focus {
+  outline: 2px solid var(--primary-500) !important;
+  outline-offset: 2px !important;
+}
+
+// Enhanced utility classes
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mt-8 { margin-top: 2rem; }
+
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.p-8 { padding: 2rem; }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+
+// Focus management for accessibility
+.focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
+
+// Loading states
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+// Responsive breakpoints
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .mat-mdc-button, .mat-mdc-raised-button {
+    height: 40px;
+    font-size: 0.875rem;
+  }
+}
+
+// Link styles
+a {
+  text-decoration: none;
+  color: var(--primary-500);
+  transition: var(--transition-fast);
+  
+  &:hover {
+    color: var(--primary-600);
+  }
+  
+  &:focus {
+    outline: 2px solid var(--primary-500);
+    outline-offset: 2px;
+    border-radius: var(--border-radius-sm);
+  }
+}
+
+// Animation classes
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
